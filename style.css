@@ -1,0 +1,2561 @@
+
+/* ====================================================
+   ELECTROTOOLS STUDIO 5
+   PROFESSIONAL ELECTRONICS LABORATORY
+   COMPLETE STYLESHEET
+==================================================== */
+
+
+/* ===========================
+   01. LIGHT THEME
+=========================== */
+
+:root {
+    color-scheme: light;
+
+    --primary: #079888;
+    --primary-dark: #06796f;
+    --primary-light: #e3f6f2;
+
+    --blue: #3579e8;
+    --green: #18b77d;
+    --orange: #f4a43b;
+    --red: #e34c61;
+
+    --bg: #f3f6fb;
+    --surface: #ffffff;
+    --surface-alt: #f8fafc;
+    --surface-hover: #edf3f8;
+
+    --text: #1d2c41;
+    --text-secondary: #687a91;
+    --text-muted: #92a0b0;
+
+    --border: #dce5ef;
+    --border-dark: #c4d1de;
+
+    --sidebar: #ffffff;
+    --header: #ffffff;
+
+    --board: #f8fbff;
+    --board-dot: #cfdae7;
+
+    --wire: #8496aa;
+    --wire-active: #08b996;
+
+    --component-fill: #e6eef7;
+    --component-stroke: #405a72;
+
+    --scope-bg: #071827;
+    --scope-grid: #1b3a4b;
+
+    --shadow-sm: 0 3px 12px rgba(20, 40, 70, .04);
+    --shadow-md: 0 10px 28px rgba(20, 40, 70, .08);
+    --shadow-lg: 0 20px 50px rgba(20, 40, 70, .13);
+
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+
+    --header-height: 72px;
+    --sidebar-width: 255px;
+
+    --transition: .2s ease;
+}
+
+
+/* ===========================
+   02. DARK THEME
+=========================== */
+
+body.dark,
+html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --primary: #27ccb3;
+    --primary-dark: #14aa99;
+    --primary-light: #143c3b;
+
+    --blue: #75aaff;
+    --green: #4ade80;
+    --orange: #fbbf24;
+    --red: #fb7185;
+
+    --bg: #0b1423;
+    --surface: #142237;
+    --surface-alt: #1b2b42;
+    --surface-hover: #253952;
+
+    --text: #eff6ff;
+    --text-secondary: #afc0d4;
+    --text-muted: #8297ae;
+
+    --border: #30435b;
+    --border-dark: #405772;
+
+    --sidebar: #111d2f;
+    --header: #111d2f;
+
+    --board: #101f33;
+    --board-dot: #304761;
+
+    --wire: #8395ad;
+    --wire-active: #33e0b6;
+
+    --component-fill: #263d57;
+    --component-stroke: #a2bcd7;
+
+    --shadow-sm: none;
+    --shadow-md: 0 12px 30px rgba(0, 0, 0, .15);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, .25);
+}
+
+
+/* ===========================
+   03. RESET
+=========================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        "Segoe UI",
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    transition:
+        background var(--transition),
+        color var(--transition);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+input,
+select,
+textarea {
+    color: var(--text);
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    padding: 10px 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input[type="range"],
+input[type="checkbox"] {
+    accent-color: var(--primary);
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.3;
+    letter-spacing: -.035em;
+}
+
+h2 {
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ===========================
+   04. HEADER
+=========================== */
+
+.app-header {
+    height: var(--header-height);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    padding: 0 25px;
+
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.header-left,
+.header-center,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-center {
+    flex: 1;
+    max-width: 480px;
+}
+
+.header-right {
+    justify-content: flex-end;
+}
+
+
+/* BRAND */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0;
+    border: none;
+
+    background: transparent;
+    color: var(--text);
+
+    font-size: 20px;
+    font-weight: 750;
+
+    white-space: nowrap;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    background: linear-gradient(135deg, #079888, #12c5aa);
+
+    color: white;
+    font-size: 24px;
+}
+
+.brand-name strong {
+    display: inline-block;
+
+    margin-left: 5px;
+    padding: 3px 6px;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+}
+
+
+/* SEARCH */
+
+.global-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 0 13px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.global-search span {
+    font-size: 23px;
+    color: var(--text-secondary);
+}
+
+.global-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    padding: 11px 0;
+}
+
+
+/* HEADER CONTROLS */
+
+.offline-indicator {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 11px;
+    font-weight: 750;
+
+    color: var(--green);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    background: var(--green);
+    border-radius: 50%;
+}
+
+#language {
+    min-width: 112px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 7px 12px;
+
+    color: var(--text);
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.theme-toggle:hover {
+    background: var(--surface-hover);
+}
+
+.theme-icon {
+    font-size: 19px;
+}
+
+.sidebar-toggle {
+    display: none;
+
+    color: var(--text);
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    padding: 6px 12px;
+    font-size: 21px;
+}
+
+
+/* ===========================
+   05. APP LAYOUT
+=========================== */
+
+.app-layout {
+    display: grid;
+
+    grid-template-columns:
+        var(--sidebar-width)
+        minmax(0, 1fr);
+
+    min-height: calc(100vh - var(--header-height));
+}
+
+.sidebar {
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+
+    padding: 23px 13px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.main-content {
+    min-width: 0;
+    padding: 27px 30px 50px;
+}
+
+
+/* ===========================
+   06. SIDEBAR
+=========================== */
+
+.sidebar-group {
+    margin-bottom: 27px;
+}
+
+.sidebar-label {
+    margin: 0 0 13px 12px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+
+    color: var(--text-muted);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 12px 13px;
+    margin: 4px 0;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    color: var(--text-secondary);
+    text-align: left;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.nav-item:hover {
+    background: var(--surface-hover);
+    color: var(--primary);
+}
+
+.nav-item.active,
+.nav-item[aria-current="page"] {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.nav-icon {
+    width: 25px;
+    flex-shrink: 0;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.sidebar-info {
+    padding: 17px;
+    border-radius: var(--radius);
+
+    background: var(--primary-light);
+}
+
+.sidebar-info strong {
+    color: var(--primary);
+    font-size: 13px;
+}
+
+.sidebar-info p {
+    margin: 7px 0 0;
+    font-size: 12px;
+}
+
+
+/* ===========================
+   07. PAGES
+=========================== */
+
+.page {
+    display: none;
+    animation: fadeIn .2s ease;
+}
+
+.page.active:not([hidden]) {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.page-heading h1 {
+    margin-bottom: 7px;
+}
+
+.page-heading p {
+    margin-bottom: 0;
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .16em;
+    color: var(--primary);
+}
+
+.section-title {
+    margin: 27px 0 15px;
+}
+
+
+/* ===========================
+   08. BUTTONS
+=========================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 9px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    transition: var(--transition);
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #079888;
+    color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #06796f;
+}
+
+.btn-secondary {
+    background: var(--surface);
+    border-color: var(--border);
+
+    color: var(--text);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-danger {
+    color: var(--red);
+    background: var(--surface);
+
+    border-color: var(--red);
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: var(--red);
+    color: #ffffff;
+}
+
+.btn-small {
+    min-height: 32px;
+    padding: 6px 10px;
+
+    font-size: 12px;
+}
+
+
+/* ===========================
+   09. PANELS
+=========================== */
+
+.panel {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+
+    min-width: 0;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.panel-heading h2 {
+    margin: 0;
+}
+
+.help-text {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+
+/* ===========================
+   10. HERO
+=========================== */
+
+.hero-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 35px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+
+    background: linear-gradient(
+        120deg,
+        var(--surface),
+        var(--primary-light)
+    );
+
+    box-shadow: var(--shadow-md);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 670px;
+}
+
+.hero-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .15em;
+
+    color: var(--primary);
+}
+
+.hero-content h2 {
+    margin: 12px 0;
+
+    font-size: clamp(25px, 3vw, 37px);
+}
+
+.hero-content p {
+    font-size: 15px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 22px;
+}
+
+.hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: 250px;
+    height: 180px;
+}
+
+.hero-meter {
+    width: 172px;
+    min-height: 120px;
+
+    padding: 13px;
+
+    background: #203e50;
+    border: 6px solid #314a5d;
+    border-radius: 16px;
+
+    text-align: center;
+    color: #b7ffda;
+
+    box-shadow: 0 14px 30px #00000022;
+}
+
+.hero-meter .meter-label {
+    display: block;
+    color: #d2e7f3;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.hero-meter strong {
+    display: block;
+
+    font-family: Consolas, monospace;
+    font-size: 37px;
+    line-height: 1.4;
+}
+
+.hero-meter > span:last-child {
+    font-size: 11px;
+}
+
+
+/* ===========================
+   11. DASHBOARD STATS
+=========================== */
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 21px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card span {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.stat-card strong {
+    font-size: 31px;
+    line-height: 1.2;
+}
+
+.stat-card small {
+    color: var(--text-muted);
+}
+
+
+/* ===========================
+   12. MODULE CARDS
+=========================== */
+
+.module-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(210px, 1fr)
+    );
+
+    gap: 15px;
+}
+
+.module-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    min-height: 185px;
+    padding: 21px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    text-align: left;
+    color: var(--text);
+
+    transition: var(--transition);
+}
+
+.module-card:hover {
+    border-color: var(--primary);
+
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.module-icon {
+    display: grid;
+    place-items: center;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 12px;
+    background: var(--primary-light);
+
+    font-size: 28px;
+}
+
+.module-card strong {
+    font-size: 16px;
+}
+
+.module-card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+
+/* ===========================
+   13. CIRCUIT BUILDER
+=========================== */
+
+.builder-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-bottom: 18px;
+}
+
+.builder-toolbar .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+}
+
+.builder-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(185px, 220px)
+        minmax(0, 1fr)
+        minmax(220px, 255px);
+
+    gap: 15px;
+    align-items: start;
+}
+
+.workspace-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    min-width: 0;
+}
+
+.component-palette h2,
+.properties-panel h2 {
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+
+/* ===========================
+   14. COMPONENT PALETTE
+=========================== */
+
+.palette-search input {
+    width: 100%;
+}
+
+.component-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    margin: 15px 0;
+}
+
+.category-btn {
+    padding: 6px 9px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.component-list {
+    display: grid;
+    gap: 8px;
+
+    max-height: 515px;
+    overflow-y: auto;
+}
+
+.component-item,
+.component-button,
+.palette-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 11px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    text-align: left;
+    color: var(--text);
+
+    transition: var(--transition);
+}
+
+.component-item:hover,
+.component-button:hover,
+.palette-item:hover,
+.component-item.selected,
+.component-button.selected,
+.palette-item.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.component-icon {
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+
+    border-radius: 8px;
+    background: var(--surface);
+
+    font-size: 21px;
+}
+
+
+/* ===========================
+   15. CIRCUIT WORKSPACE
+=========================== */
+
+.circuit-workspace {
+    padding: 0;
+    overflow: hidden;
+}
+
+.workspace-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 13px 17px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.workspace-header > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.workspace-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.simulation-status {
+    display: inline-block;
+
+    padding: 4px 10px;
+    border-radius: 20px;
+
+    background: var(--primary-light);
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.simulation-status.error {
+    color: var(--red);
+}
+
+.simulation-status.running {
+    color: var(--green);
+}
+
+.circuit-board-container {
+    min-height: 350px;
+    max-height: 700px;
+
+    overflow: auto;
+    background: var(--board);
+}
+
+.circuit-board {
+    display: block;
+
+    width: 100%;
+    min-width: 590px;
+    height: auto;
+
+    background: var(--board);
+
+    touch-action: none;
+    user-select: none;
+}
+
+.grid-point {
+    fill: var(--board-dot);
+}
+
+.circuit-board text {
+    fill: var(--text);
+    font: 13px "Segoe UI", Arial, sans-serif;
+    pointer-events: none;
+}
+
+
+/* ===========================
+   16. WIRES AND ANIMATION
+=========================== */
+
+.circuit-wire,
+.wire-path,
+.wire {
+    fill: none;
+    stroke: var(--wire);
+    stroke-width: 4;
+
+    stroke-linejoin: round;
+    stroke-linecap: round;
+
+    cursor: pointer;
+}
+
+.circuit-wire:hover,
+.wire-path:hover,
+.wire:hover {
+    stroke: var(--primary);
+    stroke-width: 6;
+}
+
+.circuit-wire.selected,
+.wire-path.selected,
+.wire.selected {
+    stroke: var(--orange);
+    stroke-width: 6;
+}
+
+.circuit-wire.active,
+.wire-path.active,
+.wire.active,
+.wire.flowing {
+    stroke: var(--wire-active);
+    stroke-dasharray: 12 8;
+
+    animation: currentFlow .9s linear infinite;
+}
+
+@keyframes currentFlow {
+    to {
+        stroke-dashoffset: -40;
+    }
+}
+
+.current-particle {
+    fill: #2cf0b4;
+    filter: drop-shadow(0 0 5px #2cf0b4);
+}
+
+
+/* ===========================
+   17. CIRCUIT COMPONENTS
+=========================== */
+
+.circuit-component,
+.board-component,
+.component-node {
+    cursor: grab;
+}
+
+.circuit-component:active,
+.board-component:active,
+.component-node:active {
+    cursor: grabbing;
+}
+
+.circuit-component.selected,
+.board-component.selected,
+.component-node.selected {
+    filter: drop-shadow(0 0 7px #f0a73d);
+}
+
+.component-body,
+.component-shape {
+    fill: var(--component-fill);
+    stroke: var(--component-stroke);
+    stroke-width: 2;
+}
+
+.component-symbol {
+    fill: none;
+    stroke: var(--component-stroke);
+    stroke-width: 3;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.component-terminal,
+.circuit-terminal,
+.terminal {
+    fill: var(--surface);
+
+    stroke: var(--primary);
+    stroke-width: 2.5;
+
+    cursor: crosshair;
+}
+
+.component-terminal:hover,
+.circuit-terminal:hover,
+.terminal:hover {
+    fill: var(--primary-light);
+    stroke-width: 4;
+}
+
+.component-terminal.pending,
+.circuit-terminal.pending,
+.terminal.pending {
+    fill: var(--orange);
+    stroke: var(--orange);
+}
+
+.led-glow,
+.led-active {
+    filter: drop-shadow(0 0 13px #f9c84a);
+}
+
+.component-on {
+    filter: drop-shadow(0 0 8px #1cdaa5);
+}
+
+.component-off {
+    opacity: .7;
+}
+
+.workspace-footer {
+    display: flex;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding: 12px 16px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+
+/* ===========================
+   18. LIVE GRAPH
+=========================== */
+
+.graph-panel h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.graph-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#circuitGraph {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin-top: 12px;
+
+    background: var(--scope-bg);
+    border: 5px solid #32485c;
+    border-radius: 13px;
+}
+
+.graph-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding-top: 13px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.current-legend {
+    color: #0fae85;
+}
+
+.voltage-legend {
+    color: var(--blue);
+}
+
+
+/* ===========================
+   19. PROPERTIES
+=========================== */
+
+#componentProperties label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin: 13px 0;
+}
+
+#componentProperties input,
+#componentProperties select {
+    width: 100%;
+}
+
+.measurement-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.measurement-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 13px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.measurement-item span {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.measurement-item strong {
+    color: var(--primary);
+
+    font-family: Consolas, monospace;
+    font-size: 21px;
+}
+
+.solver-information {
+    min-height: 38px;
+
+    margin-top: 18px;
+    padding: 12px;
+
+    background: var(--primary-light);
+    border-radius: 10px;
+
+    font-size: 12px;
+    color: var(--text-secondary);
+
+    white-space: pre-line;
+}
+
+
+/* ===========================
+   20. LABORATORIES
+=========================== */
+
+.laboratory-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(210px, 1fr)
+    );
+
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.laboratory-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+    min-height: 155px;
+
+    padding: 21px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    color: var(--text);
+    text-align: left;
+
+    transition: var(--transition);
+}
+
+.laboratory-card:hover {
+    border-color: var(--primary);
+
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.laboratory-card > span {
+    font-size: 34px;
+}
+
+.laboratory-card strong {
+    font-size: 15px;
+}
+
+.laboratory-card small {
+    color: var(--text-secondary);
+}
+
+.laboratory-workspace {
+    min-height: 230px;
+    margin-top: 20px;
+}
+
+.lab-controls {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(170px, 1fr)
+    );
+
+    gap: 14px;
+}
+
+.lab-control {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    padding: 13px;
+
+    background: var(--surface-alt);
+    border-radius: 10px;
+}
+
+.lab-control input,
+.lab-control select {
+    width: 100%;
+}
+
+.lab-result {
+    margin-top: 18px;
+    padding: 16px;
+
+    border-radius: 11px;
+    background: var(--primary-light);
+
+    color: var(--text);
+}
+
+
+/* ===========================
+   21. EQUIPMENT
+=========================== */
+
+.equipment-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(230px, 1fr)
+    );
+
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.equipment-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: 19px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.equipment-card h2 {
+    margin: 15px 0 5px;
+    font-size: 17px;
+}
+
+.equipment-card p {
+    flex: 1;
+    font-size: 12px;
+}
+
+.equipment-card .btn {
+    margin-top: 12px;
+}
+
+.equipment-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 150px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.equipment-visual img,
+.equipment-visual svg {
+    max-width: 100%;
+    max-height: 160px;
+}
+
+#equipmentWorkspace {
+    margin-top: 20px;
+    min-height: 170px;
+}
+
+
+/* ===========================
+   22. CALCULATORS
+=========================== */
+
+.calculator-toolbar,
+.formula-toolbar {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin: 20px 0;
+}
+
+.calculator-toolbar input,
+.formula-toolbar input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.calculator-toolbar select,
+.formula-toolbar select {
+    min-width: 170px;
+}
+
+.calculator-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(225px, 1fr)
+    );
+
+    gap: 15px;
+    margin-bottom: 23px;
+}
+
+.calculator-card {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    padding: 20px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    transition: var(--transition);
+}
+
+.calculator-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.calculator-card h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.calculator-card p {
+    flex: 1;
+    font-size: 12px;
+    margin: 0;
+}
+
+.calculator-card .btn {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.formula-preview {
+    padding: 12px;
+
+    background: var(--primary-light);
+    color: var(--primary) !important;
+
+    border-radius: 9px;
+    text-align: center;
+
+    font-family: Consolas, monospace;
+    font-weight: 750;
+    font-size: 15px !important;
+}
+
+
+/* ===========================
+   23. CALCULATOR WORKSPACE
+=========================== */
+
+.calculator-workspace {
+    margin-top: 20px;
+}
+
+.calculator-workspace h2 {
+    margin: 0;
+}
+
+#calculatorInputs {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(180px, 1fr)
+    );
+
+    gap: 15px;
+}
+
+#calculatorInputs label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    font-size: 13px;
+}
+
+#calculatorInputs input,
+#calculatorInputs select {
+    width: 100%;
+}
+
+.calculator-actions {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.calculator-result {
+    display: block;
+
+    min-height: 55px;
+
+    margin-top: 20px;
+    padding: 17px;
+
+    background: var(--primary-light);
+    border-radius: 12px;
+
+    font-weight: 700;
+    font-size: 15px;
+
+    color: var(--text);
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.calculator-result:empty {
+    display: none;
+}
+
+
+/* SCIENTIFIC CALCULATOR */
+
+.scientific-calculator {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 16px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.calculator-display {
+    width: 100%;
+    min-height: 75px;
+
+    padding: 15px;
+
+    font-family: Consolas, monospace;
+    font-size: 27px;
+    text-align: right;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.calculator-keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 9px;
+    margin-top: 12px;
+}
+
+.calculator-keypad button {
+    min-height: 52px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    font-size: 18px;
+}
+
+.calculator-keypad button:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+.calculator-keypad .operator {
+    color: var(--primary);
+    font-weight: 750;
+}
+
+.calculator-keypad .equals {
+    color: #ffffff;
+    background: #079888;
+}
+
+
+/* ===========================
+   24. OSCILLOSCOPE
+=========================== */
+
+.oscilloscope-panel {
+    padding: 22px;
+}
+
+.oscilloscope-controls {
+    display: flex;
+    align-items: flex-end;
+
+    flex-wrap: wrap;
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.oscilloscope-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    font-size: 12px;
+}
+
+.oscilloscope-controls input {
+    width: 130px;
+}
+
+.oscilloscope-screen {
+    padding: 8px;
+
+    background: #293d52;
+    border-radius: 17px;
+
+    overflow: hidden;
+}
+
+#oscilloscopeCanvas {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    background: var(--scope-bg);
+    border: 2px solid #40576c;
+    border-radius: 10px;
+}
+
+.oscilloscope-readings {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    margin-top: 18px;
+
+    color: var(--text-secondary);
+    font-family: Consolas, monospace;
+}
+
+
+/* ===========================
+   25. FORMULA LIBRARY
+=========================== */
+
+.notation-panel {
+    margin-bottom: 20px;
+}
+
+.notation-panel h2 {
+    margin: 0 0 15px;
+}
+
+.notation-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(140px, 1fr)
+    );
+
+    gap: 12px;
+}
+
+.notation-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+    padding: 15px 10px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.notation-grid strong {
+    font-family: Georgia, serif;
+    font-size: 30px;
+
+    color: var(--primary);
+}
+
+.notation-grid span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.notation-grid small {
+    color: var(--text-secondary);
+}
+
+.formula-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(260px, 1fr)
+    );
+
+    gap: 15px;
+}
+
+.formula-card {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    padding: 21px;
+    margin: 0 0 15px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.formula-card h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.formula-card p {
+    font-size: 13px;
+    margin: 0;
+}
+
+.formula-card .btn {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.formula-equation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.formula-equation code {
+    display: block;
+
+    padding: 12px 15px;
+
+    background: var(--primary-light);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    color: var(--primary);
+
+    font-family: Consolas, monospace;
+    font-size: 15px;
+    font-weight: 750;
+
+    overflow-wrap: anywhere;
+}
+
+.formula-grid .formula-card {
+    margin: 0;
+}
+
+
+/* ===========================
+   26. COMPONENT LIBRARY
+=========================== */
+
+.library-toolbar {
+    margin-bottom: 20px;
+}
+
+.library-toolbar input {
+    width: 100%;
+    max-width: 460px;
+}
+
+.component-library-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(190px, 1fr)
+    );
+
+    gap: 15px;
+}
+
+.component-library-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 17px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    text-align: left;
+    color: var(--text);
+
+    transition: var(--transition);
+}
+
+.component-library-card:hover {
+    border-color: var(--primary);
+}
+
+.component-library-card .preview {
+    display: grid;
+    place-items: center;
+
+    min-height: 125px;
+
+    background: var(--surface-alt);
+    border-radius: 10px;
+}
+
+.component-library-card svg {
+    max-width: 100%;
+}
+
+.component-information {
+    margin-top: 20px;
+}
+
+
+/* ===========================
+   27. LAB NOTEBOOK
+=========================== */
+
+.notebook-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .95fr)
+        minmax(0, 1.05fr);
+
+    gap: 18px;
+}
+
+.notebook-editor h2 {
+    margin-bottom: 16px;
+}
+
+.notebook-editor label {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+    margin: 14px 0;
+
+    font-size: 13px;
+}
+
+.notebook-editor input,
+.notebook-editor textarea {
+    width: 100%;
+}
+
+.notebook-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.saved-experiment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.saved-experiment {
+    padding: 15px;
+
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.saved-experiment h3 {
+    margin-bottom: 6px;
+}
+
+.saved-experiment p {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.saved-experiment small {
+    color: var(--text-muted);
+}
+
+
+/* ===========================
+   28. NOTIFICATIONS
+=========================== */
+
+.notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+
+    z-index: 1000;
+
+    max-width: min(
+        390px,
+        calc(100vw - 30px)
+    );
+
+    padding: 14px 20px;
+
+    background: #24394c;
+    color: #ffffff;
+
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+    transition: var(--transition);
+
+    pointer-events: none;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.notification.success {
+    background: #087f62;
+}
+
+.notification.error {
+    background: #bd2c42;
+}
+
+
+/* ===========================
+   29. CONFIRMATION DIALOG
+=========================== */
+
+dialog {
+    width: min(
+        440px,
+        calc(100vw - 28px)
+    );
+
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+
+    padding: 25px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-lg);
+}
+
+dialog::backdrop {
+    background: rgba(5, 17, 31, .65);
+    backdrop-filter: blur(3px);
+}
+
+dialog h2 {
+    margin-bottom: 10px;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+/* ===========================
+   30. SCROLLBARS
+=========================== */
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-dark);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+
+/* ===========================
+   31. TABLET RESPONSIVE
+=========================== */
+
+@media (max-width: 1400px) {
+
+    .builder-layout {
+        grid-template-columns:
+            minmax(175px, 205px)
+            minmax(0, 1fr);
+    }
+
+    .properties-panel {
+        grid-column: 1 / -1;
+    }
+
+    .properties-panel .measurement-grid {
+        grid-template-columns: repeat(
+            4,
+            minmax(0, 1fr)
+        );
+    }
+
+    .header-center {
+        max-width: 340px;
+    }
+
+}
+
+@media (max-width: 1050px) {
+
+    :root {
+        --sidebar-width: 225px;
+    }
+
+    .app-header {
+        padding: 0 15px;
+    }
+
+    .header-center {
+        display: none;
+    }
+
+    .main-content {
+        padding: 22px 20px;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+    .hero-visual {
+        width: 185px;
+    }
+
+    .notebook-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ===========================
+   32. MOBILE RESPONSIVE
+=========================== */
+
+@media (max-width: 760px) {
+
+    :root {
+        --header-height: 64px;
+    }
+
+    .app-header {
+        gap: 8px;
+        padding: 0 12px;
+    }
+
+    .sidebar-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    .brand-name strong,
+    .offline-indicator {
+        display: none;
+    }
+
+    #language {
+        min-width: 96px;
+        font-size: 12px;
+        padding: 8px 5px;
+    }
+
+    .theme-toggle {
+        padding: 7px 9px;
+    }
+
+    .theme-toggle span:last-child {
+        display: none;
+    }
+
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+
+        top: var(--header-height);
+        left: 0;
+        bottom: 0;
+
+        z-index: 90;
+
+        width: min(285px, 85vw);
+        overflow-y: auto;
+
+        box-shadow: var(--shadow-lg);
+
+        transform: translateX(-105%);
+        transition: transform var(--transition);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        padding: 18px 13px 30px;
+    }
+
+    .hero-panel {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .builder-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .component-palette,
+    .properties-panel {
+        grid-column: auto;
+    }
+
+    .component-list {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(125px, 1fr)
+        );
+
+        max-height: 290px;
+    }
+
+    .properties-panel .measurement-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+    .circuit-board {
+        min-width: 650px;
+    }
+
+    .calculator-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+    .equipment-grid,
+    .laboratory-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+    .oscilloscope-controls {
+        display: grid;
+
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+    .oscilloscope-controls input,
+    .oscilloscope-controls select {
+        width: 100%;
+    }
+
+}
+
+
+/* ===========================
+   33. SMALL MOBILE
+=========================== */
+
+@media (max-width: 480px) {
+
+    .brand-name {
+        font-size: 14px;
+    }
+
+    .statistics-grid {
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 13px;
+    }
+
+    .stat-card strong {
+        font-size: 26px;
+    }
+
+    .module-grid,
+    .calculator-grid,
+    .equipment-grid,
+    .laboratory-grid,
+    .formula-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .module-card {
+        min-height: 120px;
+        padding: 17px;
+    }
+
+    .builder-toolbar {
+        gap: 6px;
+    }
+
+    .builder-toolbar .btn {
+        font-size: 11px;
+        padding: 8px 9px;
+    }
+
+    .measurement-item strong {
+        font-size: 18px;
+    }
+
+    .oscilloscope-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .calculator-toolbar,
+    .formula-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .calculator-toolbar input,
+    .calculator-toolbar select,
+    .formula-toolbar input,
+    .formula-toolbar select {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+
+/* ===========================
+   34. ACCESSIBILITY
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+
+}
+
+
+/* ===========================
+   35. PRINT
+=========================== */
+
+@media print {
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .app-header,
+    .sidebar,
+    .builder-toolbar,
+    .notification,
+    .dialog-actions {
+        display: none !important;
+    }
+
+    .app-layout {
+        display: block;
+    }
+
+    .main-content {
+        padding: 0;
+    }
+
+    .panel,
+    .formula-card,
+    .calculator-card {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+
+}
+
+
+/* ====================================================
+   END OF ELECTROTOOLS STUDIO 5 CSS
+==================================================== */
