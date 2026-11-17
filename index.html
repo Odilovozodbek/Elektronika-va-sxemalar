@@ -1,1153 +1,131 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ElectroTools Studio 5 | Elektronika laboratoriyasi</title>
-
-    <meta
-        name="description"
-        content="Virtual elektronika laboratoriyasi, sxema yig‘ish, uskunalar, kalkulyatorlar va formulalar."
-    >
-
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ElectroTools Studio 5.2 — Telefon va noutbuk uchun elektronika laboratoriyasi</title>
+  <meta name="description" content="Offline virtual electronics lab with circuit builder, calculators, formula library and experiment notebook.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-<!-- ========== HEADER ========== -->
-
-<header class="app-header">
-
-    <div class="header-left">
-
-        <button
-            type="button"
-            class="sidebar-toggle"
-            id="sidebarToggle"
-            aria-label="Menyuni ochish"
-            aria-controls="sidebar"
-            aria-expanded="false"
-        >☰</button>
-
-        <button
-            type="button"
-            class="brand"
-            id="brandHome"
-        >
-            <span class="brand-icon">⚡</span>
-            <span class="brand-name">
-                ElectroTools <strong>STUDIO 5</strong>
-            </span>
-        </button>
-
+  <header class="topbar">
+    <button type="button" class="mobile-menu-button outline" id="mobileMenuToggle" aria-label="Menyuni ochish" aria-controls="appSidebar" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+    <button class="brand" id="brandHome" aria-label="Home"><span class="brand-icon">⚡</span><span>ElectroTools <b>STUDIO 5.2</b></span></button>
+    <div class="top-actions">
+      <span class="product-status"><span class="online-dot"></span><span data-i18n="offlineReady">OFFLINE READY</span></span>
+      <span class="tiny top-caption" data-i18n="study">ELECTRONICS WORKBENCH</span>
+      <select id="language" aria-label="Language"><option value="uz">O‘zbekcha</option><option value="en">English</option><option value="ru">Русский</option></select>
+      <button id="themeToggle" class="outline" title="Theme">☾</button>
     </div>
-
-    <div class="header-center">
-        <div class="global-search">
-            <span>⌕</span>
-            <input
-                id="globalSearch"
-                type="search"
-                placeholder="Formula, kalkulyator yoki uskuna qidirish..."
-                aria-label="Umumiy qidiruv"
-            >
-        </div>
-    </div>
-
-    <div class="header-right">
-
-        <span class="offline-indicator">
-            <span class="status-dot"></span>
-            OFFLINE
-        </span>
-
-        <select id="language" aria-label="Til">
-            <option value="uz">O‘zbekcha</option>
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-        </select>
-
-        <button
-            type="button"
-            id="themeToggle"
-            class="theme-toggle"
-            aria-label="Mavzuni almashtirish"
-        >
-            <span class="theme-icon">☾</span>
-            <span data-i18n="theme">Rejim</span>
-        </button>
-
-    </div>
-
-</header>
-
-
-<div class="app-layout" id="electroToolsApp">
-
-<!-- ========== SIDEBAR ========== -->
-
-<aside class="sidebar" id="sidebar">
-
-    <nav aria-label="Asosiy navigatsiya">
-
-        <div class="sidebar-group">
-            <h2 class="sidebar-label">ASOSIY BO‘LIMLAR</h2>
-
-            <button type="button" class="nav-item active"
-                    data-page="home" aria-current="page">
-                <span class="nav-icon">⌂</span>
-                <span data-i18n="home">Bosh sahifa</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="builder">
-                <span class="nav-icon">⌁</span>
-                <span data-i18n="builder">Sxema yig‘ish</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="laboratories">
-                <span class="nav-icon">⚗</span>
-                <span data-i18n="laboratories">Laboratoriyalar</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="equipment">
-                <span class="nav-icon">▣</span>
-                <span data-i18n="equipment">Uskunalar</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="calculators">
-                <span class="nav-icon">▦</span>
-                <span data-i18n="calculators">Kalkulyatorlar</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="oscilloscope">
-                <span class="nav-icon">∿</span>
-                <span data-i18n="oscilloscope">Ossillograf</span>
-            </button>
-        </div>
-
-        <div class="sidebar-group">
-            <h2 class="sidebar-label">MA'LUMOTNOMA</h2>
-
-            <button type="button" class="nav-item"
-                    data-page="formulas">
-                <span class="nav-icon">∑</span>
-                <span data-i18n="formulas">Formulalar</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="components">
-                <span class="nav-icon">Ω</span>
-                <span data-i18n="components">Elektron detallar</span>
-            </button>
-
-            <button type="button" class="nav-item"
-                    data-page="notebook">
-                <span class="nav-icon">▤</span>
-                <span data-i18n="notebook">Laboratoriya jurnali</span>
-            </button>
-        </div>
-
+  </header>
+  <button type="button" id="mobileNavBackdrop" class="mobile-nav-backdrop" aria-label="Menyuni yopish" tabindex="-1"></button>
+  <div class="shell">
+    <nav class="sidebar" id="appSidebar" aria-label="Asosiy navigatsiya">
+      <div class="section-label" data-i18n="navigation">BO‘LIMLAR</div>
+      <button class="nav active" data-page="home"><span>⌂</span><span data-i18n="home">Bosh sahifa</span></button>
+      <button class="nav" data-page="builder"><span>⌁</span><span data-i18n="builder">Sxema yig‘ish</span></button>
+      <button class="nav" data-page="labs"><span>⚗</span><span data-i18n="labs">Laboratoriyalar</span></button>
+      <button class="nav" data-page="tools"><span>▦</span><span data-i18n="tools">Uskuna va kalkulyatorlar</span></button>
+      <button class="nav" data-page="scope"><span>〰</span><span data-i18n="scope">Ossillograf</span></button>
+      <div class="section-label nav-subsection" data-i18n="referenceSection">MA'LUMOTNOMA</div>
+      <button class="nav" data-page="formulas"><span>∑</span><span data-i18n="formulas">Formulalar</span></button>
+      <button class="nav" data-page="notebook"><span>▤</span><span data-i18n="notebook">Lab jurnali</span></button>
+      <div class="sidebar-help" data-i18n="disclaimer">O‘quv simulyatori. Hisoblashlar soddalashtirilgan va haqiqiy elektr montaji uchun qo‘llanma emas.</div>
     </nav>
-
-    <div class="sidebar-footer">
-        <div class="sidebar-info">
-            <strong>ElectroTools Studio 5</strong>
-            <p>O‘quv elektronika simulyatori. Real elektr tarmog‘iga ulanmaydi.</p>
+    <main>
+      <section id="home" class="page active">
+        <div class="hero hero-new">
+          <div><p class="eyebrow" data-i18n="study">ELECTRONICS WORKBENCH</p>
+            <h1 data-i18n="welcome">Elektronika laboratoriyasi va hisoblash uskunalari</h1>
+            <p class="muted" data-i18n="welcomeDesc">Sxema yig‘ing, detallarni ulang, kuchlanish va tokni o‘lchang, grafiklarni kuzating.</p>
+            <div class="hero-actions"><button class="primary" data-go="builder" data-i18n="startBuilding">Sxema yig‘ishni boshlash</button><button class="outline" data-go="formulas" data-i18n="browseFormulas">Formulalarni ko‘rish</button></div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="hero-meter">12.00 <small>V</small></div><div class="hero-resistor"></div><span class="hero-led"></span><span class="hero-pulse">∿</span></div>
         </div>
-    </div>
-
-</aside>
-
-
-<main class="main-content" id="mainContent">
-
-<!-- ========== HOME ========== -->
-
-<section id="home" class="page active">
-
-    <div class="page-heading">
-        <div>
-            <p class="eyebrow">ELECTRONICS WORKSPACE</p>
-            <h1 data-i18n="dashboardTitle">
-                Virtual elektronika laboratoriyasi
-            </h1>
-            <p data-i18n="dashboardDescription">
-                Sxema yig‘ish, hisoblash, formulalar va o‘lchov uskunalari.
-            </p>
+        <div class="dashboard-stats" aria-label="Workspace overview">
+          <div class="stat"><span data-i18n="availableParts">Elementlar</span><strong id="statParts">17</strong><small data-i18n="componentLibrary">Komponentlar katalogi</small></div>
+          <div class="stat"><span data-i18n="calculators">Kalkulyatorlar</span><strong id="statTools">28</strong><small data-i18n="instantCalculations">Darhol hisoblash</small></div>
+          <div class="stat"><span data-i18n="formulas">Formulalar</span><strong id="statFormulas">32</strong><small data-i18n="searchableReference">Qidiriladigan ma'lumotnoma</small></div>
+          <div class="stat"><span data-i18n="savedNotes">Saqlangan yozuvlar</span><strong id="statNotes">0</strong><small data-i18n="localNotebook">Mahalliy laboratoriya jurnali</small></div>
         </div>
-    </div>
-
-    <div class="hero-panel">
-
-        <div class="hero-content">
-            <span class="hero-label">ELECTROTOOLS STUDIO</span>
-            <h2>Elektronika tajribalari bir joyda</h2>
-            <p>
-                Elektr sxemalari, tok va kuchlanish hisoblari,
-                ossillograf, formulalar va laboratoriyalar.
-            </p>
-
-            <div class="hero-actions">
-                <button type="button" class="btn btn-primary"
-                        data-go="builder">
-                    Sxema yaratish
-                </button>
-                <button type="button" class="btn btn-secondary"
-                        data-go="calculators">
-                    Kalkulyatorni ochish
-                </button>
-            </div>
+        <h2 data-i18n="modules">Laboratoriya modullari</h2>
+        <div class="module-grid">
+          <button class="module" data-go="builder"><span class="module-icon">🔌</span><b data-i18n="builder">Sxema yig‘ish</b><small data-i18n="builderDesc">Sim bilan ulash, Undo/Redo va hisoblash</small></button>
+          <button class="module" data-go="labs"><span class="module-icon">⚗</span><b data-i18n="labs">Laboratoriyalar</b><small data-i18n="labsDesc">LED, sensor, RLC, transistor, logic</small></button>
+          <button class="module" data-go="tools"><span class="module-icon">🧮</span><b data-i18n="tools">Uskuna va kalkulyatorlar</b><small data-i18n="toolsDesc">Ohm, BJT, RMS, reaktans va boshqalar</small></button>
+          <button class="module" data-go="scope"><span class="module-icon">📈</span><b data-i18n="scope">Ossillograf</b><small data-i18n="scopeDesc">Zanjir signali va signal generatori</small></button>
         </div>
+        <div class="quick-row"><div><h3 data-i18n="quickStart">Tez boshlash</h3><p class="muted" data-i18n="quickDesc">Tayyor sxema oching yoki kalkulyatorni tanlang.</p></div><div class="quick-buttons"><button class="outline" id="quickLed" data-i18n="loadLedExample">LED sxemasi</button><button class="outline" id="quickDivider" data-i18n="loadDividerExample">Kuchlanish bo‘luvchi</button><button class="outline" id="quickMath" data-i18n="mathcalc">Hisob-kitob kalkulyatori</button><button class="outline" data-go="notebook" data-i18n="openNotebook">Jurnalni ochish</button></div></div>
+        <div class="panel"><h3 data-i18n="supportedTitle">Ishlash imkoniyatlari</h3><p class="muted" data-i18n="supportedText">DC sxemalar uchun: bitta batareya, rezistor, LED, kalit, lampa, voltmetr, ampermetr, LDR va NTC. AC/RLC, BJT va mantiqiy elementlar uchun alohida tajribalar mavjud.</p></div>
+      </section>
 
-        <div class="hero-visual">
-            <div class="hero-meter">
-                <span class="meter-label">DIGITAL METER</span>
-                <strong>12.00</strong>
-                <span>V DC</span>
-            </div>
+      <section id="builder" class="page">
+        <div class="page-head"><div><h1 data-i18n="builder">Sxema yig‘ish</h1><p class="muted" data-i18n="builderHelp">Detal tanlang va maydonga bosing. Kontaktlarni navbat bilan bosib sim ulang. Detallarni sudrang.</p></div></div>
+        <div class="builder-toolbar">
+          <button class="outline" id="undo" title="Ctrl+Z">↶ <span data-i18n="undo">Ortga</span></button>
+          <button class="outline" id="redo" title="Ctrl+Y">↷ <span data-i18n="redo">Oldinga</span></button>
+          <button class="outline" id="duplicatePart" data-i18n="duplicate">Nusxalash</button>
+          <button class="outline" id="deleteSelected" data-i18n="deleteSelected">Tanlanganni o‘chirish</button>
+          <button class="outline" id="newBoard" data-i18n="newBoard">Yangi sxema</button>
+          <button class="outline danger" id="clearAll" data-i18n="clearAll">Hammasini tozalash</button>
+          <button class="outline" id="viewMode" data-i18n="showSchematic">Sxema ko‘rinishi</button>
+          <button class="outline" id="save" data-i18n="save">Saqlash</button>
+          <button class="outline" id="load" data-i18n="load">Yuklash</button><input id="loadFile" type="file" accept=".json,application/json" hidden>
+          <button class="primary" id="simulate" data-i18n="simulate">▶ Simulyatsiya</button>
         </div>
-
-    </div>
-
-    <div class="statistics-grid">
-
-        <article class="stat-card">
-            <span>Elektron detallar</span>
-            <strong id="componentCount">0</strong>
-            <small>Komponentlar katalogi</small>
-        </article>
-
-        <article class="stat-card">
-            <span>Kalkulyatorlar</span>
-            <strong id="calculatorCount">0</strong>
-            <small>Hisoblash uskunalari</small>
-        </article>
-
-        <article class="stat-card">
-            <span>Formulalar</span>
-            <strong id="formulaCount">0</strong>
-            <small>Fizik formulalar</small>
-        </article>
-
-        <article class="stat-card">
-            <span>Saqlangan tajribalar</span>
-            <strong id="experimentCount">0</strong>
-            <small>Laboratoriya jurnali</small>
-        </article>
-
-    </div>
-
-    <h2 class="section-title">Asosiy modullar</h2>
-
-    <div class="module-grid">
-
-        <button type="button" class="module-card" data-go="builder">
-            <span class="module-icon">🔌</span>
-            <strong>Sxema yig‘ish</strong>
-            <p>Detallar, simlar, Undo/Redo va simulyatsiya.</p>
-        </button>
-
-        <button type="button" class="module-card" data-go="laboratories">
-            <span class="module-icon">⚗</span>
-            <strong>Laboratoriyalar</strong>
-            <p>LED, kuchlanish bo‘luvchi, RC, RLC va mantiqiy elementlar.</p>
-        </button>
-
-        <button type="button" class="module-card" data-go="calculators">
-            <span class="module-icon">🧮</span>
-            <strong>Kalkulyatorlar</strong>
-            <p>Om qonuni, qarshilik, quvvat va ilmiy hisob-kitob.</p>
-        </button>
-
-        <button type="button" class="module-card" data-go="formulas">
-            <span class="module-icon">📖</span>
-            <strong>Formulalar</strong>
-            <p>To‘g‘ri fizik belgilar va o‘lchov birliklari.</p>
-        </button>
-
-    </div>
-
-    <div class="panel" style="margin-top:20px">
-        <h2>Tez boshlash</h2>
-        <div class="hero-actions">
-            <button type="button" class="btn btn-secondary"
-                    id="quickLed">LED sxemasi</button>
-            <button type="button" class="btn btn-secondary"
-                    id="quickDivider">Kuchlanish bo‘luvchi</button>
-            <button type="button" class="btn btn-secondary"
-                    id="quickMath">Ilmiy kalkulyator</button>
+        <details class="lab-guide" id="labGuide"><summary data-i18n="guideTitle">Tajriba bo‘yicha ko‘rsatma</summary><div id="guideBody" class="muted"></div></details>
+        <div class="builder-grid">
+          <aside class="panel palette-panel"><h3 data-i18n="components">Detallar va uskunalar</h3><div id="palette" class="palette"></div><p class="muted small" data-i18n="paletteHelp">Detalni bosing, so‘ng sxema doskasiga bosing. Tanlangan detalni Delete bilan o‘chiring.</p><button id="demo" class="outline wide" data-i18n="loadDemo">LED namunasini ochish</button></aside>
+          <div class="editor-stack">
+            <div class="panel board-panel"><div class="board-head"><span id="status" class="status">● Tayyor</span><span id="wireHint" class="muted small" data-i18n="wireHint">Ulash uchun 2 ta kontaktni bosing</span><button class="outline compact" id="cancelWire" data-i18n="cancel">Bekor qilish</button></div>
+              <p class="mobile-board-hint">↔ Sxema keng: bo‘sh joyini yon tomonga suring. Detal kontaktlarini bosib sim ulang.</p><div class="board-scroll"><svg id="board" viewBox="0 0 1080 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circuit editor"></svg></div>
+              <div class="legend"><span><i class="dot active-dot"></i><span data-i18n="flowLegend">Yashil animatsiya: tok yo‘li (taxminiy)</span></span><span><i class="dot idle-dot"></i><span data-i18n="offLegend">Kulrang: faol emas</span></span></div>
+            </div>
+            <div class="panel graph-panel"><div class="panel-heading"><div><h3 data-i18n="liveGraph">Jonli grafik: kuchlanish va tok</h3><p class="muted small" data-i18n="graphHelp">Yashil — batareya toki (mA), ko‘k — batareya kuchlanishi (V). Qiymat o‘zgarsa grafik yangilanadi.</p></div><div class="panel-actions"><button class="outline compact" id="exportGraphCSV" data-i18n="exportCSV">CSV eksport</button><button class="outline compact" id="captureLab" data-i18n="captureLab">Jurnalga yozish</button><button class="outline compact" id="resetGraph" data-i18n="resetGraph">Grafikni tozalash</button></div></div><canvas id="timeline" width="1100" height="255"></canvas><div class="graph-legend"><span>● I (mA)</span><span>● U (V)</span></div></div>
+          </div>
+          <aside class="panel inspector"><h3 data-i18n="properties">Detal xususiyatlari</h3><div id="properties" class="muted small" data-i18n="selectComponent">Detalni tanlang</div><hr><h3 data-i18n="measurements">O‘lchovlar</h3><div id="measurements"></div><div id="solverNote" class="note small"></div></aside>
         </div>
-    </div>
-
-</section>
-
-
-<!-- ========== CIRCUIT BUILDER ========== -->
-
-<section id="builder" class="page" hidden>
-
-    <div class="page-heading">
-        <div>
-            <h1 data-i18n="builder">Sxema yig‘ish</h1>
-            <p>Detallarni joylashtiring, kontaktlarni ulang va natijani hisoblang.</p>
-        </div>
-    </div>
-
-    <div class="builder-toolbar">
-
-        <button type="button" class="btn btn-secondary"
-                id="undoButton">↶ Ortga</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="redoButton">↷ Oldinga</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="duplicateButton">Nusxalash</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="deleteSelectedButton">Tanlanganni o‘chirish</button>
-
-        <button type="button" class="btn btn-danger"
-                id="clearCircuitButton">Sxemani tozalash</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="viewModeButton">Fizik ko‘rinish</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="saveCircuitButton">JSON saqlash</button>
-
-        <button type="button" class="btn btn-secondary"
-                id="loadCircuitButton">JSON yuklash</button>
-
-        <input type="file" id="circuitFileInput"
-               accept=".json,application/json" hidden>
-
-        <button type="button" class="btn btn-primary"
-                id="simulateButton">▶ Simulyatsiya</button>
-
-    </div>
-
-    <div class="builder-layout">
-
-        <aside class="panel component-palette">
-
-            <h2>Elektron detallar</h2>
-
-            <div class="palette-search">
-                <input type="search" id="componentSearch"
-                       placeholder="Detal qidirish...">
-            </div>
-
-            <div class="component-categories">
-
-                <button type="button" class="category-btn active"
-                        data-component-category="all">Barchasi</button>
-
-                <button type="button" class="category-btn"
-                        data-component-category="passive">Passiv</button>
-
-                <button type="button" class="category-btn"
-                        data-component-category="active">Aktiv</button>
-
-                <button type="button" class="category-btn"
-                        data-component-category="sources">Manbalar</button>
-
-                <button type="button" class="category-btn"
-                        data-component-category="measurement">O‘lchov</button>
-
-            </div>
-
-            <div id="componentPalette" class="component-list"></div>
-
-            <p class="help-text">
-                Detalni tanlang va doskaga bosing.
-                Sim ulash uchun ikkita kontaktni tanlang.
-            </p>
-
-        </aside>
-
-
-        <div class="workspace-column">
-
-            <div class="panel circuit-workspace">
-
-                <div class="workspace-header">
-                    <div>
-                        <strong>Circuit Workspace</strong>
-                        <span id="simulationStatus"
-                              class="simulation-status">Tayyor</span>
-                    </div>
-
-                    <div class="workspace-actions">
-                        <button type="button" id="cancelWireButton"
-                                class="btn btn-small">Simni bekor qilish</button>
-                        <button type="button" id="resetZoomButton"
-                                class="btn btn-small">100%</button>
-                    </div>
-                </div>
-
-                <div class="circuit-board-container">
-                    <svg id="circuitBoard"
-                         class="circuit-board"
-                         viewBox="0 0 1200 650"
-                         xmlns="http://www.w3.org/2000/svg"
-                         role="img"
-                         aria-label="Elektr sxema doskasi">
-
-                        <defs>
-                            <pattern id="circuitGrid"
-                                     width="20" height="20"
-                                     patternUnits="userSpaceOnUse">
-                                <circle cx="1" cy="1" r="1"
-                                        class="grid-point"/>
-                            </pattern>
-                        </defs>
-
-                        <rect width="1200" height="650"
-                              fill="url(#circuitGrid)"
-                              pointer-events="none"/>
-
-                        <g id="wireLayer"></g>
-                        <g id="componentLayer"></g>
-                        <g id="interactionLayer"></g>
-                    </svg>
-                </div>
-
-                <div class="workspace-footer">
-                    <span id="wireMessage">
-                        Ulash uchun ikkita kontaktni bosing
-                    </span>
-                    <span id="componentTotal">Elementlar: 0</span>
-                </div>
-
-            </div>
-
-
-            <div class="panel graph-panel">
-
-                <div class="panel-heading">
-                    <h2>Tok va kuchlanish grafigi</h2>
-
-                    <div class="graph-actions">
-                        <button type="button" class="btn btn-small"
-                                id="clearGraphButton">Tozalash</button>
-                        <button type="button" class="btn btn-small"
-                                id="exportGraphButton">CSV eksport</button>
-                    </div>
-                </div>
-
-                <canvas id="circuitGraph" width="1000" height="320"></canvas>
-
-                <div class="graph-legend">
-                    <span class="current-legend">● I — tok (mA)</span>
-                    <span class="voltage-legend">● U — kuchlanish (V)</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <aside class="panel properties-panel">
-
-            <h2>Element xususiyatlari</h2>
-
-            <div id="componentProperties">
-                <p>Tahrirlash uchun detalni tanlang.</p>
-            </div>
-
-            <hr>
-
-            <h2>Elektr o‘lchovlari</h2>
-
-            <div class="measurement-grid">
-
-                <div class="measurement-item">
-                    <span>Kuchlanish U</span>
-                    <strong id="measuredVoltage">0.00 V</strong>
-                </div>
-
-                <div class="measurement-item">
-                    <span>Tok kuchi I</span>
-                    <strong id="measuredCurrent">0.00 mA</strong>
-                </div>
-
-                <div class="measurement-item">
-                    <span>Qarshilik R</span>
-                    <strong id="measuredResistance">— Ω</strong>
-                </div>
-
-                <div class="measurement-item">
-                    <span>Quvvat P</span>
-                    <strong id="measuredPower">0.00 W</strong>
-                </div>
-
-            </div>
-
-            <div id="solverInformation" class="solver-information"></div>
-
-        </aside>
-
-    </div>
-
-</section>
-
-
-<!-- ========== LABORATORIES ========== -->
-
-<section id="laboratories" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Laboratoriyalar</h1>
-    </div>
-
-    <div class="laboratory-grid">
-
-        <button type="button" class="laboratory-card" data-lab="led">
-            <span>💡</span>
-            <strong>LED va rezistor</strong>
-            <small>Kalit bilan boshqarish</small>
-        </button>
-
-        <button type="button" class="laboratory-card"
-                data-lab="voltage-divider">
-            <span>🔋</span>
-            <strong>Kuchlanish bo‘luvchi</strong>
-            <small>Ketma-ket qarshiliklar</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="sensor">
-            <span>☀️</span>
-            <strong>LDR sensori</strong>
-            <small>Yorug‘lik va qarshilik</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="rc">
-            <span>◫</span>
-            <strong>RC laboratoriyasi</strong>
-            <small>Zaryadlanish jarayoni</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="rlc">
-            <span>∿</span>
-            <strong>RLC rezonansi</strong>
-            <small>Chastota va impedans</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="logic">
-            <span>⊕</span>
-            <strong>Mantiqiy elementlar</strong>
-            <small>AND, OR, NOT, XOR</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="transistor">
-            <span>♧</span>
-            <strong>BJT tranzistor</strong>
-            <small>Tok kuchayishi modeli</small>
-        </button>
-
-        <button type="button" class="laboratory-card" data-lab="pwm">
-            <span>▥</span>
-            <strong>PWM</strong>
-            <small>Impuls davomiyligi</small>
-        </button>
-
-    </div>
-
-    <div id="laboratoryWorkspace" class="panel laboratory-workspace">
-        <h2>Tajribani tanlang</h2>
-        <p>Laboratoriya boshqaruv elementlari shu yerda ochiladi.</p>
-    </div>
-
-</section>
-
-
-<!-- ========== EQUIPMENT ========== -->
-
-<section id="equipment" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Elektronika uskunalari</h1>
-    </div>
-
-    <div class="equipment-grid">
-
-        <article class="equipment-card">
-            <div class="equipment-visual" data-equipment="multimeter">
-                <span style="font-size:64px">📟</span>
-            </div>
-            <h2>Multimetr</h2>
-            <p>Kuchlanish, tok va qarshilik o‘lchovlari.</p>
-            <button type="button" class="btn btn-secondary"
-                    data-equipment-open="multimeter">Ochish</button>
-        </article>
-
-        <article class="equipment-card">
-            <div class="equipment-visual" data-equipment="oscilloscope">
-                <span style="font-size:64px">📈</span>
-            </div>
-            <h2>Ossillograf</h2>
-            <p>Signal va kuchlanish grafigi.</p>
-            <button type="button" class="btn btn-secondary"
-                    data-go="oscilloscope">Ochish</button>
-        </article>
-
-        <article class="equipment-card">
-            <div class="equipment-visual" data-equipment="generator">
-                <span style="font-size:64px">〰️</span>
-            </div>
-            <h2>Signal generatori</h2>
-            <p>Sinus, square va triangle signallari.</p>
-            <button type="button" class="btn btn-secondary"
-                    data-equipment-open="generator">Ochish</button>
-        </article>
-
-        <article class="equipment-card">
-            <div class="equipment-visual" data-equipment="power-supply">
-                <span style="font-size:64px">🔋</span>
-            </div>
-            <h2>DC kuchlanish manbai</h2>
-            <p>Virtual doimiy kuchlanish manbai.</p>
-            <button type="button" class="btn btn-secondary"
-                    data-equipment-open="power-supply">Ochish</button>
-        </article>
-
-    </div>
-
-    <div id="equipmentWorkspace" class="panel">
-        <p>O‘rganish uchun uskunani tanlang.</p>
-    </div>
-
-</section>
-
-
-<!-- ========== CALCULATORS ========== -->
-
-<section id="calculators" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Elektronika kalkulyatorlari</h1>
-    </div>
-
-    <div class="calculator-toolbar">
-
-        <input id="calculatorSearch" type="search"
-               placeholder="Kalkulyator qidirish...">
-
-        <select id="calculatorCategory">
-            <option value="all">Barchasi</option>
-            <option value="basic">Matematika</option>
-            <option value="dc">DC va quvvat</option>
-            <option value="resistance">Qarshilik</option>
-            <option value="ac">AC va chastota</option>
-            <option value="components">Komponentlar</option>
-        </select>
-
-    </div>
-
-    <div class="calculator-grid" id="calculatorGrid">
-
-        <article class="calculator-card"
-                 data-calculator="scientific" data-category="basic">
-            <h2>Ilmiy kalkulyator</h2>
-            <p>Qo‘shish, ayirish, ko‘paytirish, bo‘lish, ildiz va daraja.</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="scientific">Ochish</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="ohm" data-category="dc">
-            <h2>Om qonuni</h2>
-            <p class="formula-preview">I = U / R</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="ohm">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="series-resistance"
-                 data-category="resistance">
-            <h2>Ketma-ket qarshilik</h2>
-            <p class="formula-preview">R = R₁ + R₂ + ... + Rₙ</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="series-resistance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="parallel-resistance"
-                 data-category="resistance">
-            <h2>Parallel qarshilik</h2>
-            <p class="formula-preview">1/R = 1/R₁ + 1/R₂ + ... + 1/Rₙ</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="parallel-resistance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="conductor-resistance"
-                 data-category="resistance">
-            <h2>O‘tkazgich qarshiligi</h2>
-            <p class="formula-preview">R = ρ · l / S</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="conductor-resistance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="power" data-category="dc">
-            <h2>Elektr quvvati</h2>
-            <p class="formula-preview">P = U · I</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="power">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="voltage-divider" data-category="dc">
-            <h2>Kuchlanish bo‘luvchi</h2>
-            <p class="formula-preview">U₂ = U · R₂ / (R₁ + R₂)</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="voltage-divider">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="led-resistor"
-                 data-category="components">
-            <h2>LED rezistori</h2>
-            <p class="formula-preview">R = (Uₛ − ULED) / I</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="led-resistor">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="capacitive-reactance"
-                 data-category="ac">
-            <h2>Sig‘im reaktiv qarshiligi</h2>
-            <p class="formula-preview">Xc = 1 / (2πfC)</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="capacitive-reactance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="inductive-reactance"
-                 data-category="ac">
-            <h2>Induktiv reaktiv qarshilik</h2>
-            <p class="formula-preview">XL = 2πfL</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="inductive-reactance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="rlc-resonance"
-                 data-category="ac">
-            <h2>RLC rezonans chastotasi</h2>
-            <p class="formula-preview">f₀ = 1 / (2π√(LC))</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="rlc-resonance">Hisoblash</button>
-        </article>
-
-        <article class="calculator-card"
-                 data-calculator="resistor-colors"
-                 data-category="resistance">
-            <h2>Rezistor rang kodi</h2>
-            <p>4 halqali rezistor qiymati.</p>
-            <button type="button" class="btn btn-primary"
-                    data-open-calculator="resistor-colors">Hisoblash</button>
-        </article>
-
-    </div>
-
-    <div class="panel calculator-workspace">
-
-        <div class="panel-heading">
-            <h2 id="activeCalculatorTitle">Kalkulyatorni tanlang</h2>
-
-            <button type="button" class="btn btn-secondary"
-                    id="resetCalculatorButton">Tozalash</button>
-        </div>
-
-        <form id="calculatorForm">
-
-            <div id="calculatorInputs"></div>
-
-            <div class="calculator-actions">
-                <button type="submit" class="btn btn-primary"
-                        id="calculateButton">Hisoblash</button>
-            </div>
-
-        </form>
-
-        <output id="calculatorResult"
-                class="calculator-result"
-                aria-live="polite"></output>
-
-    </div>
-
-</section>
-
-
-<!-- ========== OSCILLOSCOPE ========== -->
-
-<section id="oscilloscope" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Virtual ossillograf</h1>
-    </div>
-
-    <div class="panel oscilloscope-panel">
-
-        <div class="oscilloscope-controls">
-
-            <label>
-                Signal manbai
-                <select id="signalSource">
-                    <option value="generator">Signal generatori</option>
-                    <option value="circuit">Sxema o‘lchovlari</option>
-                </select>
-            </label>
-
-            <label>
-                Signal turi
-                <select id="signalType">
-                    <option value="sine">Sinus</option>
-                    <option value="square">To‘rtburchak</option>
-                    <option value="triangle">Uchburchak</option>
-                </select>
-            </label>
-
-            <label>
-                Amplituda (V)
-                <input type="number" id="signalAmplitude"
-                       value="5" min="0" step="0.1">
-            </label>
-
-            <label>
-                Chastota (Hz)
-                <input type="number" id="signalFrequency"
-                       value="50" min="0.1" step="0.1">
-            </label>
-
-            <button type="button" class="btn btn-secondary"
-                    id="pauseOscilloscope">Pauza</button>
-
-        </div>
-
-        <div class="oscilloscope-screen">
-            <canvas id="oscilloscopeCanvas"
-                    width="1200" height="450"></canvas>
-        </div>
-
-        <div id="oscilloscopeReadings"
-             class="oscilloscope-readings"></div>
-
-    </div>
-
-</section>
-
-
-<!-- ========== FORMULAS ========== -->
-
-<section id="formulas" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Elektronika formulalari</h1>
-    </div>
-
-    <div class="formula-toolbar">
-
-        <input type="search" id="formulaSearch"
-               placeholder="Formula qidirish...">
-
-        <select id="formulaCategory">
-            <option value="all">Barchasi</option>
-            <option value="dc">DC</option>
-            <option value="resistance">Qarshilik</option>
-            <option value="power">Quvvat</option>
-            <option value="ac">AC</option>
-        </select>
-
-    </div>
-
-    <div class="panel notation-panel">
-
-        <h2>Fizik belgilar</h2>
-
-        <div class="notation-grid">
-
-            <div><strong>U</strong><span>Kuchlanish</span>
-                <small>V — volt</small></div>
-
-            <div><strong>I</strong><span>Tok kuchi</span>
-                <small>A — amper</small></div>
-
-            <div><strong>R</strong><span>Qarshilik</span>
-                <small>Ω — om</small></div>
-
-            <div><strong>P</strong><span>Quvvat</span>
-                <small>W — vatt</small></div>
-
-            <div><strong>ρ</strong><span>Solishtirma qarshilik</span>
-                <small>Ω·m</small></div>
-
-            <div><strong>f</strong><span>Chastota</span>
-                <small>Hz — gers</small></div>
-
-        </div>
-
-    </div>
-
-    <div class="formula-grid" id="formulaGrid">
-
-        <article class="formula-card"
-                 data-formula="ohm" data-category="dc">
-
-            <h2>Om qonuni</h2>
-
-            <div class="formula-equation">
-                <code>I = U / R</code>
-                <code>U = I · R</code>
-                <code>R = U / I</code>
-            </div>
-
-            <p>
-                U — kuchlanish (V), I — tok (A),
-                R — qarshilik (Ω).
-            </p>
-
-            <button type="button" class="btn btn-secondary"
-                    data-open-calculator="ohm">Hisoblash</button>
-
-        </article>
-
-        <article class="formula-card"
-                 data-formula="series-resistance"
-                 data-category="resistance">
-
-            <h2>Ketma-ket ulanish</h2>
-
-            <div class="formula-equation">
-                <code>R = R₁ + R₂ + ... + Rₙ</code>
-            </div>
-
-            <p>Ketma-ket ulangan rezistorlar qarshiliklari qo‘shiladi.</p>
-
-            <button type="button" class="btn btn-secondary"
-                    data-open-calculator="series-resistance">Hisoblash</button>
-
-        </article>
-
-        <article class="formula-card"
-                 data-formula="parallel-resistance"
-                 data-category="resistance">
-
-            <h2>Parallel ulanish</h2>
-
-            <div class="formula-equation">
-                <code>1/R = 1/R₁ + ... + 1/Rₙ</code>
-                <code>R = R₁R₂ / (R₁ + R₂)</code>
-            </div>
-
-            <p>Ikkinchi formula ikkita parallel rezistor uchun.</p>
-
-            <button type="button" class="btn btn-secondary"
-                    data-open-calculator="parallel-resistance">Hisoblash</button>
-
-        </article>
-
-        <article class="formula-card"
-                 data-formula="conductor-resistance"
-                 data-category="resistance">
-
-            <h2>O‘tkazgich qarshiligi</h2>
-
-            <div class="formula-equation">
-                <code>R = ρ · l / S</code>
-            </div>
-
-            <p>
-                ρ — solishtirma qarshilik, l — uzunlik,
-                S — kesim yuzasi. Birliklar mos bo‘lishi shart.
-            </p>
-
-            <button type="button" class="btn btn-secondary"
-                    data-open-calculator="conductor-resistance">Hisoblash</button>
-
-        </article>
-
-        <article class="formula-card"
-                 data-formula="power" data-category="power">
-
-            <h2>Elektr quvvati</h2>
-
-            <div class="formula-equation">
-                <code>P = U · I</code>
-                <code>P = I² · R</code>
-                <code>P = U² / R</code>
-            </div>
-
-            <p>Oxirgi ikkita tenglik rezistiv elementga tegishli.</p>
-
-            <button type="button" class="btn btn-secondary"
-                    data-open-calculator="power">Hisoblash</button>
-
-        </article>
-
-    </div>
-
-    <div id="additionalFormulas" class="formula-grid"></div>
-
-</section>
-
-
-<!-- ========== COMPONENT LIBRARY ========== -->
-
-<section id="components" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Elektron detallar kutubxonasi</h1>
-    </div>
-
-    <div class="library-toolbar">
-        <input type="search" id="componentLibrarySearch"
-               placeholder="Komponent qidirish...">
-    </div>
-
-    <div id="componentLibraryGrid"
-         class="component-library-grid"></div>
-
-    <div id="componentInformation" class="panel component-information">
-        <p>Ma’lumot uchun detalni tanlang.</p>
-    </div>
-
-</section>
-
-
-<!-- ========== NOTEBOOK ========== -->
-
-<section id="notebook" class="page" hidden>
-
-    <div class="page-heading">
-        <h1>Laboratoriya jurnali</h1>
-    </div>
-
-    <div class="notebook-layout">
-
-        <form id="notebookForm" class="panel notebook-editor">
-
-            <h2>Yangi tajriba</h2>
-
-            <label>
-                Tajriba nomi
-                <input id="experimentTitle" type="text"
-                       maxlength="120" required>
-            </label>
-
-            <label>
-                Sana
-                <input id="experimentDate" type="date">
-            </label>
-
-            <label>
-                Kuchlanish U (V)
-                <input id="experimentVoltage"
-                       type="number" step="any">
-            </label>
-
-            <label>
-                Tok kuchi I (A)
-                <input id="experimentCurrent"
-                       type="number" step="any">
-            </label>
-
-            <label>
-                Qarshilik R (Ω)
-                <input id="experimentResistance"
-                       type="number" step="any" min="0">
-            </label>
-
-            <label>
-                Kuzatishlar
-                <textarea id="experimentNotes"
-                          rows="7"></textarea>
-            </label>
-
-            <div class="notebook-actions">
-                <button type="submit" class="btn btn-primary">
-                    Saqlash
-                </button>
-
-                <button type="button" class="btn btn-secondary"
-                        id="captureMeasurementsButton">
-                    O‘lchovlarni qo‘shish
-                </button>
-            </div>
-
-        </form>
-
-        <div class="panel notebook-records">
-
-            <div class="panel-heading">
-                <h2>Saqlangan tajribalar</h2>
-
-                <button type="button" class="btn btn-secondary"
-                        id="exportNotebookButton">
-                    Hisobot eksporti
-                </button>
-            </div>
-
-            <div id="savedExperiments"
-                 class="saved-experiment-list"></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-</div>
-
-
-<!-- ========== NOTIFICATION ========== -->
-
-<div id="notification"
-     class="notification"
-     role="status"
-     aria-live="polite"></div>
-
-
-<!-- ========== CONFIRMATION DIALOG ========== -->
-
-<dialog id="confirmationDialog">
-
-    <form method="dialog">
-
-        <h2 id="confirmationTitle">
-            Amalni tasdiqlash
-        </h2>
-
-        <p id="confirmationMessage">
-            Davom ettirmoqchimisiz?
-        </p>
-
-        <div class="dialog-actions">
-
-            <button type="submit" class="btn btn-secondary"
-                    value="cancel">Bekor qilish</button>
-
-            <button type="submit" class="btn btn-danger"
-                    value="confirm">Tasdiqlash</button>
-
-        </div>
-
-    </form>
-
-</dialog>
-
+      </section>
+
+      <section id="labs" class="page"><h1 data-i18n="labs">Laboratoriyalar</h1><p class="muted" data-i18n="labsIntro">Tayyor tajribani tanlang; ba'zilari sxema muharririda, boshqalari interaktiv hisoblagichlarda ochiladi.</p>
+        <div class="module-grid lab-modules">
+          <button class="module" data-lab="led"><span class="module-icon">💡</span><b data-i18n="labLed">LED va kalit</b></button>
+          <button class="module" data-lab="divider"><span class="module-icon">🔋</span><b data-i18n="labDivider">Kuchlanish bo‘luvchi</b></button>
+          <button class="module" data-lab="ldr"><span class="module-icon">☀</span><b data-i18n="labLdr">Fotorezistor (LDR)</b></button>
+          <button class="module" data-lab="rlc"><span class="module-icon">∿</span><b data-i18n="labRlc">Series RLC</b></button>
+          <button class="module" data-lab="logic"><span class="module-icon">⊕</span><b data-i18n="labLogic">Logic gates</b></button>
+          <button class="module" data-lab="bjt"><span class="module-icon">♧</span><b data-i18n="labBjt">BJT Transistor</b></button>
+          <button class="module" data-lab="rc"><span class="module-icon">τ</span><b data-i18n="labRc">RC zaryadlanish</b></button>
+          <button class="module" data-lab="pwm"><span class="module-icon">▥</span><b data-i18n="labPwm">PWM boshqaruvi</b></button>
+        </div><div class="panel" id="labDetails"><p class="muted" data-i18n="chooseLab">Yuqoridan laboratoriya tanlang</p></div>
+      </section>
+
+      <section id="tools" class="page">
+        <div class="page-head"><div><p class="eyebrow" data-i18n="study">ELEKTRONIKA LABORATORIYASI</p><h1 data-i18n="tools">Uskuna va kalkulyatorlar</h1><p class="muted" data-i18n="toolsIntro">Electronics Toolbox uslubidagi mustaqil hisoblash uskunalari.</p></div><span class="count-chip" id="toolCount">0</span></div>
+        <div class="search-strip"><label class="search-box"><span>⌕</span><input id="toolSearch" type="search" data-i18n-placeholder="searchTools" placeholder="Kalkulyator qidirish..." autocomplete="off"></label>
+        <select id="toolCategory" aria-label="Calculator category"><option value="all" data-i18n="allCategories">Barcha yo‘nalishlar</option><option value="dc" data-i18n="catDc">DC & quvvat</option><option value="ac" data-i18n="catAc">AC & signallar</option><option value="components" data-i18n="catComponents">Komponentlar</option><option value="digital" data-i18n="catDigital">Raqamli</option></select></div>
+        <div class="tools-layout"><div class="tool-library"><div id="toolCards" class="tool-grid"></div><p class="muted small" id="toolsEmpty" hidden data-i18n="noSearchResults">Hech narsa topilmadi.</p></div>
+        <div class="panel tool-workspace" id="toolDetails"><p class="muted" data-i18n="chooseTool">Hisoblash uskunaini tanlang</p></div></div>
+      </section>
+
+      <section id="scope" class="page"><h1 data-i18n="scope">Ossillograf</h1><p class="muted" data-i18n="scopeIntro">Zanjirdagi real hisoblangan DC o‘lchovlar tarixini yoki mustaqil signal generatorini ko‘ring.</p><div class="panel"><div class="scope-bar"><label><span data-i18n="source">Manba</span><select id="scopeSource"><option value="circuit" data-i18n="circuitHistory">Sxema o‘lchovlari</option><option value="generator" data-i18n="generator">Signal generatori</option></select></label><label><span data-i18n="waveform">Signal turi</span><select id="wave"><option value="sine">Sine</option><option value="square">Square</option><option value="triangle">Triangle</option></select></label><label><span data-i18n="amplitude">Amplituda (V)</span><input id="amplitude" type="number" value="5" min="0" max="30" step="0.5"></label><label><span data-i18n="frequency">Chastota (Hz)</span><input id="frequency" type="number" value="50" min="0.1" max="100000" step="1"></label><button class="outline" id="pauseScope" data-i18n="pause">To‘xtatish</button></div><canvas id="oscilloscope" width="1150" height="410"></canvas><div id="scopeData" class="result"></div></div></section>
+
+      <section id="formulas" class="page">
+        <div class="page-head"><div><p class="eyebrow" data-i18n="referenceSection">MA'LUMOTNOMA</p><h1 data-i18n="formulaTitle">Elektronika formulalari</h1><p class="muted" data-i18n="formulaSubtitle">Formulalar, izohlar, birliklar va mos kalkulyatorlar bir joyda.</p></div><span class="count-chip" id="formulaCount">0</span></div>
+        <div class="search-strip"><label class="search-box"><span>⌕</span><input id="formulaSearch" type="search" placeholder="Formula qidirish..." data-i18n-placeholder="searchFormulas" autocomplete="off"></label>
+        <select id="formulaCategory" aria-label="Formula category"><option value="all" data-i18n="allCategories">Barcha yo‘nalishlar</option><option value="dc" data-i18n="catDc">DC & quvvat</option><option value="ac" data-i18n="catAc">AC & signallar</option><option value="components" data-i18n="catComponents">Komponentlar</option><option value="digital" data-i18n="catDigital">Raqamli</option></select></div>
+        <div class="formula-grid" id="formulaGrid"></div><p id="formulasEmpty" class="muted" hidden data-i18n="noSearchResults">Hech narsa topilmadi.</p>
+        <div class="disclaimer-panel"><strong data-i18n="learningNotice">O‘quv eslatmasi</strong><p data-i18n="referenceDisclaimer">Formulalar ideal yoki soddalashtirilgan modellarga asoslangan. Haqiqiy qurilmalar uchun ishlab chiqaruvchi ma'lumotlarini tekshirish kerak.</p></div>
+      </section>
+
+      <section id="notebook" class="page">
+        <div class="page-head"><div><p class="eyebrow" data-i18n="journalLabel">EXPERIMENT JOURNAL</p><h1 data-i18n="notebook">Laboratoriya jurnali</h1><p class="muted" data-i18n="notebookSubtitle">Tajriba, o‘lchovlar va xulosalarni brauzerda saqlang.</p></div><button id="exportNotebook" class="outline" data-i18n="exportNotes">Hisobotni eksport qilish</button></div>
+        <div class="notebook-grid"><div class="panel note-editor"><label for="noteTitle" data-i18n="experimentTitle">Tajriba nomi</label><input id="noteTitle" type="text" maxlength="100" placeholder="LED current measurement" value="LED circuit experiment"><label for="noteText" data-i18n="observations">Kuzatishlar va xulosalar</label><textarea id="noteText" rows="9" maxlength="10000" placeholder="Write results and observations..."></textarea><div class="note-actions"><button class="primary" id="saveNote" data-i18n="saveNote">Yozuvni saqlash</button><button class="outline" id="snapshotNote" data-i18n="captureReadings">Joriy o‘lchovni qo‘shish</button></div><p class="muted small" data-i18n="notebookPrivacy">Yozuvlar shu brauzerda saqlanadi va serverga yuborilmaydi.</p></div>
+        <div class="panel saved-notes"><div class="panel-heading"><h3 data-i18n="recentNotes">Oxirgi yozuvlar</h3><span class="count-chip" id="noteCount">0</span></div><div id="noteList" class="note-list"></div></div></div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
